@@ -1,15 +1,19 @@
 package kolokwium_2024;
 
-public class Kandydat {
-    private String nazwisko;
-    private boolean czyZdobytyMandat;
-    private KomitetWyborczy komitetWyborczy;
+public class Kandydat implements Comparable<Kandydat> {
+    public String nazwisko;
+    public int liczbaGlosow;
 
-    public void setCzyZdobytyMandat(boolean czyZdobytyMandat) {
-        this.czyZdobytyMandat = czyZdobytyMandat;
+    public void powiadom(boolean mandat) {
     }
 
-    public KomitetWyborczy getKomitetWyborczy() {
-        return komitetWyborczy;
+    @Override
+    public int compareTo(Kandydat other) {
+        if (this.liczbaGlosow > other.liczbaGlosow) {
+            return -1;
+        } else if (this.liczbaGlosow < other.liczbaGlosow) {
+            return 1;
+        }
+        return 0;
     }
 }

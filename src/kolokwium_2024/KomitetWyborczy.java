@@ -1,40 +1,30 @@
 package kolokwium_2024;
 
-public class KomitetWyborczy {
-    private Kandydat[] listaKandydatow;
-    private Kandydat[] listaKandydatowZMandatami;
+public class KomitetWyborczy implements Comparable<KomitetWyborczy> {
+    public String nazwa;
+    public int sumaGlosow;
+    public Kandydat[] kandydaci;
+    public Kandydat[] kandydaciZMandatem;
+    public int id;
 
-    private float[] ilorazy;
+    public int zdobyteMandaty = 0;
+    public int dzielnik = 1;
+    public double aktualnyIloraz;
 
-    private void poinformujKandydata(Kandydat kandydat) {
-        for (int i = 0; i < listaKandydatowZMandatami.length; i++) {
-            if (kandydat.equals(listaKandydatowZMandatami[i])) {
-                kandydat.setCzyZdobytyMandat(true);
+    @Override
+    public int compareTo(KomitetWyborczy other) {
+        if (this.aktualnyIloraz > other.aktualnyIloraz) {
+            return -1;
+        } else if (this.aktualnyIloraz < other.aktualnyIloraz) {
+            return 1;
+        } else {
+            if (this.id < other.id) {
+                return -1;
+            } else if (this.id > other.id) {
+                return 1;
+            } else {
+                return 0;
             }
         }
-    }
-
-    public void dodajKandydata(Kandydat kandydat) {
-        if (listaKandydatow == null) {
-            listaKandydatow = new Kandydat[1];
-            listaKandydatow[0] = kandydat;
-        } else {
-            Kandydat[] nowaListaKandydatow = new Kandydat[listaKandydatow.length + 1];
-            System.arraycopy(listaKandydatow,  0, nowaListaKandydatow, 0, listaKandydatow.length);
-            nowaListaKandydatow[listaKandydatow.length] = kandydat;
-            listaKandydatow = nowaListaKandydatow;
-        }
-    }
-
-    public void policzIlorazy(int glosy) {
-        int k = 20;
-        ilorazy = new float[k];
-        for (int i = 0; i < k; i++) {
-            ilorazy[i] = (float) glosy / (i + 1);
-        }
-    }
-
-    public float[] getIlorazy() {
-        return ilorazy;
     }
 }
